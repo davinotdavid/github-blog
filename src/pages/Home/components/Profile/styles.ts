@@ -9,7 +9,10 @@ export const StyledSection = styled.section`
   background-color: ${(props) => props.theme.colors.baseProfile};
   border-radius: 10px;
 
-  img {
+  > img {
+    width: 9.25rem;
+    height: 9.25rem;
+    object-fit: cover;
     border-radius: 8px;
   }
 
