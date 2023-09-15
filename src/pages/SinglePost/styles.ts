@@ -51,6 +51,42 @@ export const BadgeSpan = styled.span`
   }
 `;
 
+export const FirstLetterCapsSpan = styled.span`
+  &::first-letter {
+    text-transform: capitalize;
+  }
+`;
+
 export const PostContentContainer = styled.div`
   padding: 2.5rem 2rem;
+
+  /* Markdown styles */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-block: 1rem;
+  }
+
+  p {
+    margin-block-end: 0.5rem;
+
+    &:has(code) {
+      margin-block: 2rem;
+    }
+  }
+
+  a {
+    color: ${(props) => props.theme.colors.blue};
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  code {
+    background-color: ${(props) => props.theme.colors.basePost};
+    padding: 1rem;
+  }
 `;

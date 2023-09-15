@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { formatDistance } from "date-fns";
+import ReactMarkdown from "react-markdown";
 import {
   BadgeSpan,
   MainContainer,
@@ -8,6 +9,7 @@ import {
   StyledHeader,
   PostContentContainer,
   LinksContainer,
+  FirstLetterCapsSpan,
 } from "./styles";
 import GithubIconSVG from "../../../public/icons/github.svg";
 import DateIconSVG from "../../../public/icons/date.svg";
@@ -76,11 +78,11 @@ export function SinglePost() {
           </BadgeSpan>
           <BadgeSpan>
             <img src={DateIconSVG} alt="" />
-            <span style={{ textTransform: "capitalize" }}>
+            <FirstLetterCapsSpan>
               {formatDistance(new Date(singlePostData.created_at), new Date(), {
                 addSuffix: true,
               })}
-            </span>
+            </FirstLetterCapsSpan>
           </BadgeSpan>
           <BadgeSpan>
             <img src={CommentIconSVG} alt="" />
@@ -93,7 +95,7 @@ export function SinglePost() {
       </StyledHeader>
 
       <PostContentContainer>
-        <p>{singlePostData.body}</p>
+        <ReactMarkdown>{singlePostData.body}</ReactMarkdown>
       </PostContentContainer>
     </MainContainer>
   );
