@@ -28,4 +28,8 @@ export const GlobalStyle = createGlobalStyle`
     list-style: none;
     margin: 0;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;

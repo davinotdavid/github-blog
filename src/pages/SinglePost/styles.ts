@@ -1,39 +1,32 @@
 import styled from "styled-components";
 
-export const StyledSection = styled.section`
-  display: flex;
-  gap: 2rem;
+export const MainContainer = styled.main``;
+
+export const StyledHeader = styled.header`
   padding: 2rem 2.5rem;
-  margin: -5.5rem 0px 4.5rem;
+  margin-block-start: -5.5rem;
   box-shadow: 0px 2px 28px 0px rgba(0, 0, 0, 0.2);
   background-color: ${(props) => props.theme.colors.baseProfile};
   border-radius: 10px;
 
-  > img {
-    width: 9.25rem;
-    height: 9.25rem;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
-  p {
-    margin-block-end: 1.5rem;
+  h1 {
+    margin-block-end: 0.5rem;
   }
 `;
 
-export const StyledHeader = styled.header`
+export const LinksContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-block-end: 1.25rem;
 
   a {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    text-decoration: none;
-    font-weight: 700;
     font-size: 0.75rem;
+    font-weight: 700;
     color: ${(props) => props.theme.colors.blue};
     border-block-end: 1px solid transparent;
 
@@ -43,7 +36,7 @@ export const StyledHeader = styled.header`
   }
 `;
 
-export const StyledFooter = styled.footer`
+export const BadgeContainer = styled.div`
   display: flex;
   gap: 1.5rem;
 `;
@@ -56,4 +49,8 @@ export const BadgeSpan = styled.span`
   img {
     color: ${(props) => props.theme.colors.baseLabel};
   }
+`;
+
+export const PostContentContainer = styled.div`
+  padding: 2.5rem 2rem;
 `;

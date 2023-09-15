@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { BadgeSpan, StyledFooter, StyledSection, StyledHeader } from "./styles";
+import { api } from "../../../../lib/axios";
 import GithubIconSVG from "../../../../../public/icons/github.svg";
 import CompanyIconSVG from "../../../../../public/icons/company.svg";
 import PeopleIconSVG from "../../../../../public/icons/people.svg";
-import { api } from "../../../../lib/axios";
+import OpenExternalIconSVG from "../../../../../public/icons/open-external.svg";
 
 interface ProfileData {
   username: string;
@@ -44,7 +45,13 @@ export function Profile() {
       <div>
         <StyledHeader>
           <h1>Davi Nakano</h1>
-          <a href="#">GITHUB</a>
+          <a
+            href="https://github.com/davinotdavid"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GITHUB <img src={OpenExternalIconSVG} alt="" />
+          </a>
         </StyledHeader>
         <p>{profileData.bio}</p>
 
