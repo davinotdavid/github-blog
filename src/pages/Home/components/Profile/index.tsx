@@ -29,10 +29,12 @@ export function Profile() {
       company,
       numberOfFollowers: followers,
     });
+
+    console.log("Fetching profile data");
   }
 
   useEffect(() => {
-    // fetchGithubUserData();
+    fetchGithubUserData();
   }, []);
 
   return (

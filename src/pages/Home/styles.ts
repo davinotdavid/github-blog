@@ -44,6 +44,7 @@ export const PostsContainer = styled.ul`
   margin-block-end: 3rem;
 
   li {
+    max-width: 26rem;
     max-height: 16.25rem;
     padding: 2rem;
     border-radius: 10px;
@@ -56,16 +57,20 @@ export const PostsContainer = styled.ul`
     }
 
     header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
       margin-block-end: 1.25rem;
 
       h3 {
-        flex: 1;
         font-size: 1.25rem;
         color: ${(props) => props.theme.colors.baseTitle};
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
+      span {
+        font-size: 0.875rem;
+        color: ${(props) => props.theme.colors.baseSpan};
       }
     }
 

@@ -1,39 +1,86 @@
+import { ChangeEvent, useEffect, useState } from "react";
+import { formatDistance } from "date-fns";
 import { Profile } from "./components/Profile";
 import { MainContainer, PostsContainer, PostsHeader } from "./styles";
+import { useDebounce } from "../../hooks/useDebounce";
+import { api } from "../../lib/axios";
+
+interface Post {
+  number: string;
+  title: string;
+  body: string;
+  created_at: string;
+}
+
+interface PostsData {
+  total: number;
+  posts: Post[];
+}
 
 export function Home() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [postsData, setPostsData] = useState<PostsData>({
+    total: 0,
+    posts: [],
+  });
+  const debouncedSearchTerm = useDebounce(searchTerm);
+
+  function handleOnSearchChanged(e: ChangeEvent<HTMLInputElement>) {
+    setSearchTerm(e.target.value);
+  }
+
+  async function fetchPosts(debouncedSearchTerm?: string) {
+    const response = await api.get("/search/issues", {
+      params: {
+        q: `${debouncedSearchTerm}repo:davinotdavid/github-blog`,
+      },
+    });
+
+    setPostsData({
+      total: response.data.total_count,
+      posts: response.data.items,
+    });
+
+    console.log(response.data);
+  }
+
+  useEffect(() => {
+    fetchPosts(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
+
   return (
     <MainContainer>
       <Profile />
 
       <PostsHeader>
         <h2>Blog posts</h2>
-        <span>32 posts</span>
+        <span>
+          {postsData.total} post{postsData.total !== 1 && "s"}
+        </span>
       </PostsHeader>
 
-      <input type="text" placeholder="Search for content" />
+      <input
+        type="text"
+        placeholder="Search for content"
+        onChange={handleOnSearchChanged}
+        value={searchTerm}
+      />
 
       <PostsContainer>
-        <li>
-          <header>
-            <h3>JavaScript data types and data structures</h3>
-            <span>Há 1 dia</span>
-          </header>
+        {postsData.posts.map((post) => (
+          <li key={post.number}>
+            <header>
+              <h3>{post.title}</h3>
+              <span>
+                {formatDistance(new Date(post.created_at), new Date(), {
+                  addSuffix: true,
+                })}
+              </span>
+            </header>
 
-          <p>
-            Programming languages all have built-in data structures, but these
-            often differ from one language to another. This article attempts to
-            list the built-in data structures available in JavaScript and what
-            properties they have. These can be used to build other data
-            structures. Wherever possible, comparisons with other languages are
-            drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-            language. Variables in JavaScript are not directly associated with
-            any particular value type, and any variable can be assigned (and
-            re-assigned) values of all types: let foo = 42; // foo is now a
-            number foo = 'bar'; // foo is now a string foo = true; // foo is now
-            a boolean
-          </p>
-        </li>
+            <p>{post.body}</p>
+          </li>
+        ))}
       </PostsContainer>
     </MainContainer>
   );
