@@ -5,9 +5,14 @@ export const MainContainer = styled.main`
     padding: 0.75rem 1rem;
     color: ${(props) => props.theme.colors.baseText};
     background-color: ${(props) => props.theme.colors.baseInput};
-    border-radius: 1px solid ${(props) => props.theme.colors.baseBorder};
+    border-radius: 6px;
     width: 100%;
     margin-block-end: 3rem;
+    border: 1px solid ${(props) => props.theme.colors.baseBorder};
+
+    &:active {
+      border: 1px solid ${(props) => props.theme.colors.blue};
+    }
 
     &::placeholder {
       color: ${(props) => props.theme.colors.baseLabel};
@@ -43,6 +48,12 @@ export const PostsContainer = styled.ul`
     padding: 2rem;
     border-radius: 10px;
     background-color: ${(props) => props.theme.colors.basePost};
+    border: 2px solid transparent;
+    cursor: pointer;
+
+    &:hover {
+      border: 2px solid ${(props) => props.theme.colors.baseLabel};
+    }
 
     header {
       display: flex;

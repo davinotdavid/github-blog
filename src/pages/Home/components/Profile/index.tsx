@@ -32,7 +32,7 @@ export function Profile() {
   }
 
   useEffect(() => {
-    fetchGithubUserData();
+    // fetchGithubUserData();
   }, []);
 
   return (
