@@ -23,4 +23,9 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
     line-height: 1.6;
   }
+
+  ul {
+    list-style: none;
+    margin: 0;
+  }
 `;

@@ -4,7 +4,7 @@ export const StyledSection = styled.section`
   display: flex;
   gap: 2rem;
   padding: 2rem 2.5rem;
-  margin-block-start: -5.5rem;
+  margin: -5.5rem 0px 4.5rem;
   box-shadow: 0px 2px 28px 0px rgba(0, 0, 0, 0.2);
   background-color: ${(props) => props.theme.colors.baseProfile};
   border-radius: 10px;
