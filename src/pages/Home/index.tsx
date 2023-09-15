@@ -32,7 +32,9 @@ export function Home() {
   async function fetchPosts(debouncedSearchTerm?: string) {
     const response = await api.get("/search/issues", {
       params: {
-        q: `${debouncedSearchTerm}repo:davinotdavid/github-blog`,
+        q: `${
+          debouncedSearchTerm && `${debouncedSearchTerm} `
+        }repo:davinotdavid/github-blog`,
       },
     });
 
