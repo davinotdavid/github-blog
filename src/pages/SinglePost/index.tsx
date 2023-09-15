@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { formatDistance } from "date-fns";
 import {
   BadgeSpan,
   MainContainer,
@@ -7,13 +10,45 @@ import {
   LinksContainer,
 } from "./styles";
 import GithubIconSVG from "../../../public/icons/github.svg";
-import CompanyIconSVG from "../../../public/icons/company.svg";
-import PeopleIconSVG from "../../../public/icons/people.svg";
+import DateIconSVG from "../../../public/icons/date.svg";
+import CommentIconSVG from "../../../public/icons/comment.svg";
 import BackIconSVG from "../../../public/icons/back.svg";
 import OpenExternalIconSVG from "../../../public/icons/open-external.svg";
-import { Link } from "react-router-dom";
+import { api } from "../../lib/axios";
+
+interface SinglePostData {
+  title: string;
+  body: string;
+  comments: number;
+  created_at: string;
+  html_url: string;
+  user: {
+    login: string;
+  };
+}
 
 export function SinglePost() {
+  const routeParams = useParams();
+  const [singlePostData, setSinglePostData] = useState<SinglePostData>(
+    {} as SinglePostData
+  );
+
+  useEffect(() => {
+    async function fetchSinglePostData() {
+      const response = await api.get(
+        `/repos/davinotdavid/github-blog/issues/${routeParams.postNumber}`
+      );
+
+      setSinglePostData(response.data);
+    }
+
+    fetchSinglePostData();
+  }, [routeParams.postNumber]);
+
+  if (!singlePostData.title) {
+    return null;
+  }
+
   return (
     <MainContainer>
       <StyledHeader>
@@ -22,32 +57,43 @@ export function SinglePost() {
             <img src={BackIconSVG} alt="" />
             BACK
           </Link>
-          <a href="#">
+          <a
+            href={singlePostData.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             READ ON GITHUB
             <img src={OpenExternalIconSVG} alt="" />
           </a>
         </LinksContainer>
 
-        <h1>JavaScript data types and data structures</h1>
+        <h1>{singlePostData.title}</h1>
 
         <BadgeContainer>
           <BadgeSpan>
             <img src={GithubIconSVG} alt="" />
-            <span>cameronwll</span>
+            <span>{singlePostData.user.login}</span>
           </BadgeSpan>
           <BadgeSpan>
-            <img src={CompanyIconSVG} alt="" />
-            <span>Há 1 dia</span>
+            <img src={DateIconSVG} alt="" />
+            <span style={{ textTransform: "capitalize" }}>
+              {formatDistance(new Date(singlePostData.created_at), new Date(), {
+                addSuffix: true,
+              })}
+            </span>
           </BadgeSpan>
           <BadgeSpan>
-            <img src={PeopleIconSVG} alt="" />
-            <span>5 comentários</span>
+            <img src={CommentIconSVG} alt="" />
+            <span>
+              {singlePostData.comments} comment
+              {singlePostData.comments !== 1 && "s"}
+            </span>
           </BadgeSpan>
         </BadgeContainer>
       </StyledHeader>
 
       <PostContentContainer>
-        <p>hey!</p>
+        <p>{singlePostData.body}</p>
       </PostContentContainer>
     </MainContainer>
   );
