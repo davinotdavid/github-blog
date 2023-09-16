@@ -1,27 +1,45 @@
-# React + TypeScript + Vite
+<h1 align="center"> GitHub Blog </h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+A simple blog that uses this GitHub repo's issues as posts with markdown rendering.
+</p>
 
-Currently, two official plugins are available:
+<p align="center">
+Check it out live <a href="https://github-blog-red-sigma.vercel.app">here</a>!
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p align="center">
+  <a href="#technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#learnings">Learnings</a>&nbsp;&nbsp;&nbsp;
+</p>
 
-## Expanding the ESLint configuration
+<p align="center">
+  <img alt="" src=".github/preview.jpg" width="100%">
+</p>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies
 
-- Configure the top-level `parserOptions` property like this:
+- HTML
+- CSS (styled-components)
+- TypeScript
+- React
+- React Router
+- React Markdown
+- Axios
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## Project
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Even though it seems like an unhinged idea, it is possible to leverage GitHub's infrastructure in order to create a simple blog. By considering the repo's issues as posts and its comments as (uh) comments, we can use GitHub's API to query for the data and render it with a blog-y UI.
+
+## Learnings
+
+The whole project idea was an interesting learning experience for me as it encouraged some out-of-the-box thinking and it allowed me to look into existing structures in a different way.
+
+Technically wise, even though I was familiar with the concept of debouncing, it was still somewhat unknown for me how to create a `useDebounce` hook that used TypeScript generics in its type.
+
+There are still quite a bit that can be done to make the project better (not an extensive list):
+
+- Create components for rendering the posts' comments, as well as a CRUD flow for creating comments from within the UI instead of having to go to GH for it.
+- Improve the responsive styles
+- Create a Context and extract the axios calls outside of the components that use it. Also separate the components a little better for better render performance / avoiding unnecessary re-renders (perhaps using something like [use-context-selector](https://github.com/dai-shi/use-context-selector)).
