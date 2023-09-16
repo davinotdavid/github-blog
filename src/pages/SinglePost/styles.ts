@@ -72,7 +72,8 @@ export const PostContentContainer = styled.div`
   p {
     margin-block-end: 0.5rem;
 
-    &:has(code) {
+    &:has(code),
+    &:has(img) {
       margin-block: 2rem;
     }
   }
@@ -83,6 +84,11 @@ export const PostContentContainer = styled.div`
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  img {
+    width: 100%;
+    object-fit: cover;
   }
 
   code {

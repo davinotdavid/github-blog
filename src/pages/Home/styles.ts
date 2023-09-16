@@ -43,6 +43,10 @@ export const PostsContainer = styled.ul`
   overflow: hidden;
   margin-block-end: 3rem;
 
+  a {
+    color: inherit;
+  }
+
   li {
     max-width: 26rem;
     max-height: 16.25rem;

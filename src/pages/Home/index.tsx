@@ -4,6 +4,7 @@ import { Profile } from "./components/Profile";
 import { MainContainer, PostsContainer, PostsHeader } from "./styles";
 import { useDebounce } from "../../hooks/useDebounce";
 import { api } from "../../lib/axios";
+import { Link } from "react-router-dom";
 
 interface Post {
   number: string;
@@ -70,18 +71,20 @@ export function Home() {
 
       <PostsContainer>
         {postsData.posts.map((post) => (
-          <li key={post.number}>
-            <header>
-              <h3>{post.title}</h3>
-              <span>
-                {formatDistance(new Date(post.created_at), new Date(), {
-                  addSuffix: true,
-                })}
-              </span>
-            </header>
+          <Link to={`/posts/${post.number}`} key={post.number}>
+            <li>
+              <header>
+                <h3>{post.title}</h3>
+                <span>
+                  {formatDistance(new Date(post.created_at), new Date(), {
+                    addSuffix: true,
+                  })}
+                </span>
+              </header>
 
-            <p>{post.body}</p>
-          </li>
+              <p>{post.body}</p>
+            </li>
+          </Link>
         ))}
       </PostsContainer>
     </MainContainer>
